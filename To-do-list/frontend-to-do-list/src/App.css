@@ -1,0 +1,29 @@
+.button:focus{
+    background-color: aqua;
+}
+
+.button:hover{
+    background-color: rgba(245, 245, 245, 0.909);
+}
+
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: flex-end; 
+    padding-right: 10px;
+}
+
+.input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
