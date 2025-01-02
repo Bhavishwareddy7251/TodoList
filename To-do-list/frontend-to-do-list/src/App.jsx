@@ -16,11 +16,13 @@ import Login from "./components/Login"
 
 
 function App() {
-  localStorage.setItem('isauth','true')
+  localStorage.setItem('isAuthenticated', 'false');
   const [userId,setUserId] = useState("")
-  const update=localStorage.getItem('isauth')
-  const [isauth,setisauth] =useState(update)
-  console.log(update)
+  let [isAuthenticated,setisAuthenticated]=useState(localStorage.getItem('isAuthenticated')==='true');
+  const handleLogin=()=>{
+    setisAuthenticated(localStorage.getItem('isAuthenticated')==='true')
+    console.log(setisAuthenticated(localStorage.getItem('isAuthenticated')==='true'))
+  }
   const browserRouterObj = createBrowserRouter([
     {
       path: "/",
@@ -28,13 +30,13 @@ function App() {
     },
     {
       path: "login",
-      element: <Login setUserId={setUserId} isauth={isauth} setisauth={setisauth} />,
+      element: <Login setUserId={setUserId} handleLogin={handleLogin}/>,
     },
     {
       path: "root",
-      element: isauth==='true' ? <RootLayout userId={userId} setUserId={setUserId} /> : <Login/>,
+      element: isAuthenticated ? <RootLayout userId={userId} setUserId={setUserId} /> : <Login handleLogin={handleLogin}/>,
       children: [
-        { path: "", element: update==='true' ?  <TodayTasks userId={userId} />: <Login/> },
+        { path: "", element: isAuthenticated ?  <TodayTasks userId={userId} />: <Login/> },
         { path: "profile", element: <Profile /> },
         { path: "upcoming", element: <UpcomingTasks userId={userId} /> },
         { path: "pending", element: <PendingTasks userId={userId} /> },
