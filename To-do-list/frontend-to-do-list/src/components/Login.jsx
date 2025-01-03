@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 
-function Login({setUserId,isauth}) {
-    
+function Login({setUserId,handleLogin}) {
     const navigate = useNavigate();
       const [password,setpassword]=useState("");
       const [email,setemail]=useState("");
@@ -22,7 +21,8 @@ function Login({setUserId,isauth}) {
           if(response.data.found){
             setUserId(response.data.payload._id);
             console.log(response.data.payload._id)
-            setisauth('true')
+            localStorage.setItem('isAuthenticated', 'true');
+            handleLogin()
             navigate('/root')
           }
         }catch(e){
